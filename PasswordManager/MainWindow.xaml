@@ -4,7 +4,11 @@
         Title="Password Manager"
         Width="1200"
         Height="700"
-        ResizeMode="NoResize" Background="#FF282828" Icon="/VaultIcon.png" WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize"
+        Background="#FF282828"
+        Icon="/VaultIcon.png"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
 
     <Window.Resources>
         <Style x:Key="ModernButtonStyle" TargetType="Button">
@@ -17,14 +21,9 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Border Background="{TemplateBinding Background}" CornerRadius="5"/>
-
                             <Border x:Name="InteractionOverlay" Background="White" Opacity="0" CornerRadius="6"/>
-
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center" 
-                                          Margin="{TemplateBinding Padding}"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
                         </Grid>
-
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="InteractionOverlay" Property="Opacity" Value="0.15"/>
@@ -38,7 +37,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FF1F1F1F"/>
             <Setter Property="Foreground" Value="White"/>
@@ -50,17 +48,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="5">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style TargetType="PasswordBox">
             <Setter Property="Background" Value="#FF1F1F1F"/>
             <Setter Property="Foreground" Value="White"/>
@@ -72,10 +66,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
-                        <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="5">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
@@ -84,157 +75,212 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Border BorderBrush="#FF1F1F1F" BorderThickness="1">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-
-        <!-- Bal oldali panel -->
-        <Border Grid.Column="0"
-                Background="#FF1F1F1F"
-                BorderBrush="#FF282828"
-                BorderThickness="0,0,1,0">
-
-            <StackPanel Margin="10">
-                
-                <TextBlock Text="Password Manager" 
-                           Foreground="White" 
-                           FontSize="22" 
-                           FontWeight="Bold" 
-                           Margin="0,10,0,30" 
-                           HorizontalAlignment="Center"/>
-
-                <Button Content="Mentés"
-                        Style="{StaticResource ModernButtonStyle}"
-                        Height="40"
-                        Margin="0,0,0,10"
-                        Background="#FF5C933A" 
-                        Click="Save_Click" />
-
-                <Button Content="Kiválasztott törlése"
-                        Style="{StaticResource ModernButtonStyle}"
-                        Height="40"
-                        Margin="0,0,0,10"
-                        Background="#FFF33D21"
-                        Foreground="White"
-                        Click="Delete_Click"/>
-
-            </StackPanel>
-
-        </Border>
-
-        <!-- Jobb oldal -->
-        <Grid Grid.Column="1" Margin="10">
+        <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Szolgáltatás:"
-                       Foreground="White"
-                       Margin="0,0,0,5"/>
+            <!-- ================= TITLE BAR ================= -->
+            <Grid Background="#FF000000"
+                  Grid.Row="0"
+                  MouseDown="TitleBar_MouseDown">
 
-            <TextBox x:Name="ServiceTextBox"
-                     Grid.Row="1"
-                     Height="30"
-                     Margin="0,0,0,10"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Jelszó:"
-                       Grid.Row="2"
-                       Foreground="White"
-                       Margin="0,10,0,5"/>
+                <TextBlock Text="Password Manager"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="10,0"/>
 
-            <PasswordBox x:Name="PasswordBox"
-                         Grid.Row="3"
-                         Height="30"
-                         Margin="0,0,0,10"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
 
-            <TextBlock Text="Bejegyzések"
-                       Grid.Row="4"
-                       Foreground="White"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Margin="0,10,0,10"/>
+                    <Button Content="_"
+                            Width="45"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="Minimize_Click"/>
 
-            <!-- Card list -->
-            <ListBox x:Name="PasswordsList" 
-                     Grid.Row="5"
-                     HorizontalContentAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     Background="Transparent"
-                     BorderThickness="0">
+                    <Button Content="☐"
+                            Width="45"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="Maximize_Click"/>
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="#FF1F1F1F"
-                                CornerRadius="8"
-                                Padding="10"
+                    <Button Content="X"
+                            Width="45"
+                            Background="#FFB00020"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="Close_Click"/>
+
+                </StackPanel>
+
+            </Grid>
+
+            <!-- ================= CONTENT ================= -->
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- LEFT PANEL -->
+                <Border Grid.Column="0"
+                        Background="#FF1F1F1F"
+                        BorderBrush="#FF282828"
+                        BorderThickness="0,0,1,0">
+
+                    <StackPanel Margin="10">
+
+                        <TextBlock Text="Password Manager"
+                                   Foreground="White"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Margin="0,10,0,30"
+                                   HorizontalAlignment="Center"/>
+
+                        <Button Content="Mentés"
+                                Style="{StaticResource ModernButtonStyle}"
+                                Height="40"
                                 Margin="0,0,0,10"
-                                HorizontalAlignment="Stretch">
+                                Background="#FF5C933A"
+                                Click="Save_Click" />
 
-                            <Grid HorizontalAlignment="Stretch">
+                        <Button Content="Kiválasztott törlése"
+                                Style="{StaticResource ModernButtonStyle}"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                Background="#FFF33D21"
+                                Click="Delete_Click"/>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                    </StackPanel>
 
-                                <TextBlock Text="{Binding Value}"
-                                           Grid.Column="0"
-                                           Foreground="White"
-                                           FontSize="16"
-                                           VerticalAlignment="Center"/>
+                </Border>
 
-                                <TextBlock x:Name="VisiblePasswordText" 
-                                           Grid.Column="1"
-                                           Foreground="#FF5C933A"
-                                           FontSize="16"
-                                           FontWeight="Bold"
-                                           Margin="10,0,15,0"
-                                           VerticalAlignment="Center"
-                                           Visibility="Collapsed"/>
+                <!-- RIGHT PANEL -->
+                <Grid Grid.Column="1" Margin="10">
 
-                                <Button x:Name="ToggleBtn"
-                                        Style="{StaticResource ModernButtonStyle}"
-                                        Content="👁️ Mutat"
-                                        Grid.Column="2"
-                                        Padding="10,0"
-                                        Margin="0,0,10,0"
-                                        Height="35"
-                                        Background="#FF3481BE"
-                                        Foreground="White"
-                                        Tag="{Binding}"
-                                        Click="ToggleVisibility_Click"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                                <Button Content="📋 Másol"
-                                        Style="{StaticResource ModernButtonStyle}"
-                                        Grid.Column="3"
-                                        Padding="10,0"
-                                        Height="35"
-                                        Background="#FF6DA446"
-                                        Foreground="White"
-                                        Tag="{Binding}"
-                                        Click="CopyToClipboard_Click"/>
+                    <TextBlock Text="Szolgáltatás:"
+                               Foreground="White"
+                               Margin="0,0,0,5"/>
 
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                    <TextBox x:Name="ServiceTextBox"
+                             Grid.Row="1"
+                             Height="30"
+                             Margin="0,0,0,10"/>
 
-            </ListBox>
+                    <TextBlock Text="Jelszó:"
+                               Grid.Row="2"
+                               Foreground="White"
+                               Margin="0,10,0,5"/>
+
+                    <PasswordBox x:Name="PasswordBox"
+                                 Grid.Row="3"
+                                 Height="30"
+                                 Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Bejegyzések"
+                               Grid.Row="4"
+                               Foreground="White"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Margin="0,10,0,10"/>
+
+                    <ListBox x:Name="PasswordsList" 
+                             Grid.Row="5" HorizontalContentAlignment="Stretch" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                             Background="Transparent" 
+                             BorderThickness="0">
+                        
+                        <ListBox.ItemTemplate>
+                            
+                            <DataTemplate>
+                                
+                                <Border Background="#FF1F1F1F" 
+                                        CornerRadius="8" Padding="10" 
+                                        Margin="0,0,0,10" 
+                                        HorizontalAlignment="Stretch">
+                                    
+                                    <Grid HorizontalAlignment="Stretch">
+                                        
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBlock Text="{Binding Value}" 
+                                                   Grid.Column="0" 
+                                                   Foreground="White" 
+                                                   FontSize="16" 
+                                                   VerticalAlignment="Center"/>
+                                        
+                                        <TextBlock x:Name="VisiblePasswordText" 
+                                                   Grid.Column="1" 
+                                                   Foreground="#FF5C933A" 
+                                                   FontSize="16" 
+                                                   FontWeight="Bold" 
+                                                   Margin="10,0,15,0" 
+                                                   VerticalAlignment="Center" 
+                                                   Visibility="Collapsed"/>
+                                        
+                                        <Button x:Name="ToggleBtn" 
+                                                Style="{StaticResource ModernButtonStyle}" 
+                                                Content="👁️ Mutat" 
+                                                Grid.Column="2" 
+                                                Padding="10,0" 
+                                                Margin="0,0,10,0" 
+                                                Height="35" 
+                                                Background="#FF3481BE" 
+                                                Foreground="White" 
+                                                Tag="{Binding}" 
+                                                Click="ToggleVisibility_Click"/>
+                                        
+                                        <Button Content="📋 Másol" 
+                                                Style="{StaticResource ModernButtonStyle}" 
+                                                Grid.Column="3" 
+                                                Padding="10,0" 
+                                                Height="35" 
+                                                Background="#FF6DA446" 
+                                                Foreground="White" 
+                                                Tag="{Binding}" 
+                                                Click="CopyToClipboard_Click"/>
+                                    </Grid>
+                                    
+                                </Border>
+                                
+                            </DataTemplate>
+                            
+                        </ListBox.ItemTemplate>
+                        
+                    </ListBox>
+
+                </Grid>
+
+            </Grid>
 
         </Grid>
 
-    </Grid>
+    </Border>
 
 </Window>

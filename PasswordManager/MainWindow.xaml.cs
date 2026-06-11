@@ -1,10 +1,11 @@
-﻿using PasswordManager.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PasswordManager.Data;
 using PasswordManager.Models;
 using PasswordManager.Services;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Windows.Input;
 
 namespace PasswordManager
 {
@@ -147,6 +148,29 @@ namespace PasswordManager
                     MessageBox.Show("Nem sikerült visszafejteni a jelszót.", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed) 
+            {
+                DragMove();
+            }    
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
